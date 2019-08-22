@@ -14,10 +14,11 @@ jobs:
             16ACFD5FBD34880E584ECD2975E9CA927C18C076 \
             8695A8BFD3F97CDAAC35775A9CA4ABB381AB73C8 \
           ; do \
-            timeout 5s gpg --keyserver pgp.mit.edu --recv-keys "${key}" & || true
-            timeout 5s gpg --keyserver keyserver.pgp.com --recv-keys "${key}" & || true
-            timeout 5s gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${key}" & || true
-            timeout 5s gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "${key}" & || true
+            (timeout 5s gpg --keyserver pgp.mit.edu --recv-keys "${key}" &) || true
+            (timeout 5s gpg --keyserver keyserver.pgp.com --recv-keys "${key}" &) || true
+            (timeout 5s gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${key}" &) || true
+            (timeout 5s gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "${key}" &) || true
             wait
+            echo "done"s
           done
 
