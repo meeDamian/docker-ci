@@ -7,11 +7,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: All
-      run: docker build -t ${GITHUB_REPOSITORY,,} --file Dockerfile .
-    - name: Create dir for artifacts
-      run: mkdir -p out/
+      run: docker build test --file Dockerfile .
     - name: Save all
-      run: docker images ${GITHUB_REPOSITORY,,} --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > out/$(echo {} | tr ':' '-').tgz"
+      run: mkdir -p out/ && docker images test --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > out/$(echo {} | tr ':' '-').tgz"
     - name: Upload
       uses: actions/upload-artifact@master
       with:
