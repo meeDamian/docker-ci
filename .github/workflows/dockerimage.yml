@@ -7,9 +7,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: All
-      run: docker build --file Dockerfile .
+      run: docker build -t xxx --file Dockerfile .
+    - name: print info
+      run: pwd && ls && env
     - name: Save all
-      run: mkdir -p q/ && docker images --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > q/{}.tgz"
+      run: mkdir -p q/ && docker images xxx --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > q/{}.tgz"
     - name: Upload
       uses: actions/upload-artifact@master
       with:
