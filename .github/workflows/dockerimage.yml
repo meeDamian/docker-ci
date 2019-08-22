@@ -9,7 +9,11 @@ jobs:
     - name: All
       run: docker build -t test --file Dockerfile .
     - name: Save all
-      run: mkdir -p out/ && docker images test --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > out/$(echo {} | tr ':' '-').tgz"
+      run: >
+        mkdir -p out/ &&
+        docker images test --format "{{.Repository}}:{{.Tag}}"
+          | xargs -I% sh -c "docker save % | gzip > out/%.tgz" &&
+        rename s/:/-/ out/*
     - name: Upload
       uses: actions/upload-artifact@master
       with:
