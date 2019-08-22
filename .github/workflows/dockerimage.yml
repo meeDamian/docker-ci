@@ -11,8 +11,7 @@ jobs:
     - name: Save all
       run: >
         mkdir -p out/ &&
-        docker images test --format "{{.Repository}}:{{.Tag}}"
-          | xargs -I% sh -c "docker save % | gzip > out/%.tgz" &&
+        docker images test --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz" &&
         rename s/:/-/ out/*
     - name: Upload
       uses: actions/upload-artifact@master
