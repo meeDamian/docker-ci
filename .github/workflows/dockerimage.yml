@@ -15,12 +15,20 @@ jobs:
             8695A8BFD3F97CDAAC35775A9CA4ABB381AB73C8 \
         )
 
-        (gpg --keyserver pgp.mit.edu --recv-keys "${key}" &) || true
-        (gpg --keyserver keyserver.pgp.com --recv-keys "${key}" &) || true
-        (gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${key}" &) || true
-        (gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "${key}" &) || true
+        pids=()
+        (gpg --keyserver pgp.mit.edu --recv-keys "${key}" || true &) || true
+        pids+=($!)
 
-        timeout 5s wait
+        (gpg --keyserver keyserver.pgp.com --recv-keys "${key}" || true &) || true
+        pids+=($!)
+
+        (gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${key}" || true &) || true
+        pids+=($!)
+
+        (gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "${key}" || true &) || true
+        pids+=($!)
+
+        wait "${pids[@]}"
 
         echo "~~ done ~~"
         gpg --list-keys
