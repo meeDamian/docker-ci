@@ -4,16 +4,9 @@ jobs:
   build:
     name: Builds all images
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        keyserver:
-        - pgp.mit.edu
-        - keyserver.pgp.com
-        - ha.pool.sks-keyservers.net
-        - hkp://p80.pool.sks-keyservers.net:80
     steps:
     - uses: actions/checkout@v1
-    - name: pgp.mit.edu
+    - name: All
       run: |
         for key in \
             E1A5C593CD419DE28E8315CF3C2525ED14360CDE \
@@ -21,10 +14,10 @@ jobs:
             16ACFD5FBD34880E584ECD2975E9CA927C18C076 \
             8695A8BFD3F97CDAAC35775A9CA4ABB381AB73C8 \
           ; do \
-            timeout 5s gpg --keyserver pgp.mit.edu --recv-keys "${key}"
-            timeout 5s gpg --keyserver keyserver.pgp.com --recv-keys "${key}"
-            timeout 5s gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${key}"
-            timeout 5s gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "${key}"
+            timeout 5s gpg --keyserver pgp.mit.edu --recv-keys "${key}" & || true
+            timeout 5s gpg --keyserver keyserver.pgp.com --recv-keys "${key}" & || true
+            timeout 5s gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${key}" & || true
+            timeout 5s gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "${key}" & || true
             wait
           done
 
