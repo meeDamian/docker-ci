@@ -7,16 +7,16 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: All
-      run: docker build -t xxx --file Dockerfile .
-    - name: print info
-      run: pwd && ls && env
+      run: docker build -t ${GITHUB_REPOSITORY,,} --file Dockerfile .
+    - name: Create dir for artifacts
+      run: mkdir -p out/
     - name: Save all
-      run: mkdir -p q/ && docker images xxx --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > q/{}.tgz"
+      run: docker images ${GITHUB_REPOSITORY,,} --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > out//Users/mee/dev/lncm/docker-ci/.github/workflows/dockerimage.yml.tgz"
     - name: Upload
       uses: actions/upload-artifact@master
       with:
         name: containers
-        path: q/
+        path: out/
     - name: own action
       uses: meeDamian/docker-ci/sync-readme@master
       with:
