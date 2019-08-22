@@ -12,7 +12,9 @@ jobs:
       run: >
         mkdir -p out/ &&
         docker images test --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz" &&
-        rename s/:/-/ out/*
+        for file in $(ls out/); do
+          mv ${file} $(echo ${file} | tr : -)
+        done
     - name: Upload
       uses: actions/upload-artifact@master
       with:
