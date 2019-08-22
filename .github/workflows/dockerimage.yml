@@ -11,7 +11,7 @@ jobs:
     - name: Create dir for artifacts
       run: mkdir -p out/
     - name: Save all
-      run: docker images ${GITHUB_REPOSITORY,,} --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > out//Users/mee/dev/lncm/docker-ci/.github/workflows/dockerimage.yml.tgz"
+      run: docker images ${GITHUB_REPOSITORY,,} --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > out/$(echo {} | tr ':' '-').tgz"
     - name: Upload
       uses: actions/upload-artifact@master
       with:
