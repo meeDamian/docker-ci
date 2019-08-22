@@ -15,4 +15,9 @@ jobs:
       with:
         name: containers
         path: q/
+    - name: own action
+      uses: meeDamian/docker-ci/sync-readme@master
+      with:
+        username: aaaa
+        password: bbbb
 
