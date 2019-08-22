@@ -8,10 +8,10 @@ jobs:
     - uses: actions/checkout@v1
     - name: All
       run: docker build --file Dockerfile .
-    - name: Save all
-      run: mkdir -p "${HOME}/q/" && docker images ${GITHUB_REPOSITORY,,} --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > ${HOME}/q/{}.tgz"
-    - name: Upload
-      uses: actions/upload-artifact@master
-      with:
-        name: containers
-        path: ${HOME}/q/
+#    - name: Save all
+#      run: mkdir -p "${HOME}/q/" && docker images ${GITHUB_REPOSITORY,,} --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > ${HOME}/q/{}.tgz"
+#    - name: Upload
+#      uses: actions/upload-artifact@master
+#      with:
+#        name: containers
+#        path: ${HOME}/q/
