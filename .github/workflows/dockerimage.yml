@@ -14,5 +14,5 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: containers
-        path: ${HOME}/q/
+        path: q/
 
