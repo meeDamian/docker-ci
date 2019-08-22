@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: All
-      run: docker build test --file Dockerfile .
+      run: docker build -t test --file Dockerfile .
     - name: Save all
       run: mkdir -p out/ && docker images test --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > out/$(echo {} | tr ':' '-').tgz"
     - name: Upload
