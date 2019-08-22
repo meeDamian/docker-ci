@@ -7,25 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: All
-      run: |
-        KEYS=( \
-            E1A5C593CD419DE28E8315CF3C2525ED14360CDE \
-            CEACC9E15534EBABB82D3FA03353C9CEF108B584 \
-            16ACFD5FBD34880E584ECD2975E9CA927C18C076 \
-            8695A8BFD3F97CDAAC35775A9CA4ABB381AB73C8 \
-        )
-
-        gpg --keyserver pgp.mit.edu --recv-keys ${KEYS[@]} &
-        sleep 1s
-
-        gpg --keyserver keyserver.pgp.com --recv-keys ${KEYS[@]} &
-        gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${KEYS[@]} &
-        gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys ${KEYS[@]} &
-
-        wait -n
-
-        echo "~~ done ~~"
-        gpg --list-keys
+      run: docker build --file Dockerfile .
 
   old:
     name: Fetch keys one-by-one
@@ -33,18 +15,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: All
-        run: |
-          for key in \
-              E1A5C593CD419DE28E8315CF3C2525ED14360CDE \
-              CEACC9E15534EBABB82D3FA03353C9CEF108B584 \
-              16ACFD5FBD34880E584ECD2975E9CA927C18C076 \
-              8695A8BFD3F97CDAAC35775A9CA4ABB381AB73C8 \
-            ; do
-              gpg --keyserver pgp.mit.edu --recv-keys "${key}" || \
-              gpg --keyserver keyserver.pgp.com --recv-keys "${key}" || \
-              gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${key}" || \
-              gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "${key}" ;
-            done
-
-            echo "~~ done ~~"
-            gpg --list-keys
+        run: docker build --file Dockerfile2 .
