@@ -16,6 +16,8 @@ jobs:
         )
 
         gpg --keyserver pgp.mit.edu --recv-keys ${KEYS} &
+        sleep 1s
+        
         gpg --keyserver keyserver.pgp.com --recv-keys ${KEYS} &
         gpg --keyserver ha.pool.sks-keyservers.net --recv-keys ${KEYS} &
         gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys ${KEYS} &
@@ -26,7 +28,7 @@ jobs:
         gpg --list-keys
 
   old:
-    name: Fetch keys opne-by-one
+    name: Fetch keys one-by-one
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
