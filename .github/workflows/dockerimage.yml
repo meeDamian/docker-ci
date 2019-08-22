@@ -9,7 +9,7 @@ jobs:
     - name: All
       run: docker build --file Dockerfile .
     - name: Save all
-      run: mkdir -p ${HOME}/q/ && docker images ${GITHUB_REPOSITORY,,} --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > ${HOME}/q/{}.tgz"
+      run: mkdir -p q/ && docker images --format "{{.Repository}}:{{.Tag}}" | xargs -I{} sh -c "docker save {} | gzip > q/{}.tgz"
     - name: Upload
       uses: actions/upload-artifact@master
       with:
