@@ -21,3 +21,4 @@ RUN KEYS=( \
   gpg --list-keys
 
 RUN gpg --list-keys
+
