@@ -43,7 +43,7 @@ JSON
 
 echo "world | ${INPUT_USER} | ${INPUT_PASS} | ${INPUT_SLUG} | ${INPUT_README} | ${PAYLOAD} |"
 
-
+curl -H "Content-Type: application/json" -d "${PAYLOAD}" https://hub.docker.com/v2/users/login/
 
 exit 0
 
