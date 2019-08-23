@@ -31,7 +31,7 @@ if [ -z "${INPUT_SLUG}" ]; then
 fi
 
 # Convert to lower case, which Docker requires
-INPUT_SLUG=${INPUT_SLUG,,}
+INPUT_SLUG="${INPUT_SLUG,,}"
 
 PAYLOAD=$(cat <<-JSON
   {
