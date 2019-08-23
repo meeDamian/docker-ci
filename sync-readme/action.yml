@@ -15,11 +15,9 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://busybox:latest'
-  entrypoint: "ls"
+  image: 'Dockerfile'
   args:
-    - "-la"
-#    - ${{ inputs.yyy }}
+    - ${{ inputs.yyy }}
 
 branding:
   color: 'green'
