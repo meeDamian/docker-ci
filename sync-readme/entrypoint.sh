@@ -5,28 +5,28 @@ set -e
 # Since Github doesn't seem to verify the `required` param, it has to be done here…
 
 print_input_error() {
-  >&2 printf "%s is required, and must be specified.\n" "$1"
+  >&2 printf "\n'%s' is required, and must be specified.\n" "$1"
   >&2 printf "\tNote: %s\n" "$2"
   >&2 printf "Try:\n"
   >&2 printf "\tuses: meeDamian/docker-ci/sync-readme@TAG\n"
   >&2 printf "\twith:\n"
   >&2 printf "\t  user: \${{ secrets.DOCKER_USER }}\n"
   >&2 printf "\t  pass: \${{ secrets.DOCKER_PASS }}\n"
-  >&2 printf "\t  slug: \${{ github.repository }}\n"
+  >&2 printf "\t  slug: \${{ github.repository }}\n\n"
 }
 
 if [ -z "${INPUT_USER}" ]; then
-  print_input_error "Docker Hub Username" "It's the login you use to access Docker Hub."
+  print_input_error "user" "It's the username used to login to Docker Hub."
   exit 1
 fi
 
 if [ -z "${INPUT_PASS}" ]; then
-  print_input_error "Docker Hub Password" "It's the password you use to access Docker Hub."
+  print_input_error "pass" "It's the password used to login to Docker Hub."
   exit 1
 fi
 
 if [ -z "${INPUT_SLUG}" ]; then
-  print_input_error "Docker Hub Slug" "It's the image name you use to pull images from Docker Hub (minus any tag)"
+  print_input_error "slug" "It's the image name used to pull images from Docker Hub (ex. meedamian/simple-qemu) "
   exit 1
 fi
 
