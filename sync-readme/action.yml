@@ -5,12 +5,14 @@ inputs:
   username:
     description: Docker Hub username
     required: true
+
   password:
     description: Docker Hub password
     required: true
+
   slug:
-    description: "Docker Hub repository in the form of: <namespace>/<name>.  Github's slug used if not provided."
-    required: false
+    description: "Docker Hub repository path in the form of: <namespace>/<name>"
+    required: true
 
 runs:
   using: 'docker'
