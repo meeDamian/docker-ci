@@ -5,14 +5,14 @@ set -e
 # Since Github doesn't seem to verify the `required` param, it has to be done here…
 
 print_input_error() {
-  >&2 printf "%s is required, and must be specified. Try:" "$1"
-  >&2 printf "\tNote: %s" "$2"
+  >&2 printf "%s is required, and must be specified.\n" "$1"
+  >&2 printf "\tNote: %s\n" "$2"
   >&2 printf "Try:\n"
-  >&2 printf "\tuses: meeDamian/docker-ci/sync-readme@TAG"
-  >&2 printf "\twith:"
-  >&2 printf "\t  user: \${{ secrets.DOCKER_USER }}"
-  >&2 printf "\t  pass: \${{ secrets.DOCKER_PASS }}"
-  >&2 printf "\t  slug: \${GITHUB_REPOSITORY,,}"
+  >&2 printf "\tuses: meeDamian/docker-ci/sync-readme@TAG\n"
+  >&2 printf "\twith:\n"
+  >&2 printf "\t  user: \${{ secrets.DOCKER_USER }}\n"
+  >&2 printf "\t  pass: \${{ secrets.DOCKER_PASS }}\n"
+  >&2 printf "\t  slug: \${{ github.repository }}\n"
 }
 
 if [ -z "${INPUT_USER}" ]; then

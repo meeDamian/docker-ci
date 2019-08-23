@@ -11,7 +11,7 @@ inputs:
     required: true
 
   slug:
-    description: "Docker Hub repository path in the form of: <namespace>/<name>"
+    description: "Docker Hub repository path in the form of: <namespace>/<name>.  Will be converted to lower case, if isn't already"
     required: true
 
   readme:
