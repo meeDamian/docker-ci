@@ -17,7 +17,7 @@ runs:
   using: 'docker'
   image: 'docker://busybox:latest'
   entrypoint:
-    - ./entrypoint.sh
+    - 'xxx'
 
   args:
     - ${{ inputs.yyy }}
