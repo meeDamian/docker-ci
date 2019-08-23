@@ -17,8 +17,8 @@ runs:
   using: 'docker'
   image: 'docker://busybox:latest'
   entrypoint: ["xxx"]
-  args:
-    - ${{ inputs.yyy }}
+#  args:
+#    - ${{ inputs.yyy }}
 
 branding:
   color: 'green'
