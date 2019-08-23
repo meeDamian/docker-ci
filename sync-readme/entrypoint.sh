@@ -30,17 +30,20 @@ if [ -z "${INPUT_SLUG}" ]; then
   input_error "slug" "image name used to pull images from Docker Hub (ex. meedamian/simple-qemu) "
 fi
 
-PAYLOAD=$(cat <<JSON
-{
-  "username": "${INPUT_USER}",
-  "password": "${INPUT_PASS}"
-}
+# Convert to lower case, which Docker requires
+INPUT_SLUG=${INPUT_SLUG,,}
+
+PAYLOAD=$(cat <<-JSON
+  {
+    "username": "${INPUT_USER}",
+    "password": "${INPUT_PASS}"
+  }
 JSON
 )
 
 echo "world | ${INPUT_USER} | ${INPUT_PASS} | ${INPUT_SLUG} | ${INPUT_README}" | "${PAYLOAD}" |
 
-
+exit 0
 
 
 
