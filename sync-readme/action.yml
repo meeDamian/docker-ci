@@ -16,7 +16,9 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://busybox:latest'
-  entrypoint: ls
+  entrypoint: ./entrypoint.sh
+  args:
+    - ${{ inputs.username }}
 
 branding:
   color: 'green'

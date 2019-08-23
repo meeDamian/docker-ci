@@ -6,20 +6,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: All
-      run: docker build -t test --file Dockerfile .
-    - name: Save all
-      run: >
-        mkdir -p out/ &&
-        docker images test --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz" &&
-        for file in $(ls out/); do
-          mv out/${file} out/$(echo ${file} | tr : -)
-        done
-    - name: Upload
-      uses: actions/upload-artifact@master
-      with:
-        name: containers
-        path: out/
+#    - name: All
+#      run: docker build -t test --file Dockerfile .
+#    - name: Save all
+#      run: >
+#        mkdir -p out/ &&
+#        docker images test --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz" &&
+#        for file in $(ls out/); do
+#          mv out/${file} out/$(echo ${file} | tr : -)
+#        done
+#    - name: Upload
+#      uses: actions/upload-artifact@master
+#      with:
+#        name: containers
+#        path: out/
     - name: own action
       uses: meeDamian/docker-ci/sync-readme@master
       with:
