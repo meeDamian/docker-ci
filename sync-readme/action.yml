@@ -17,7 +17,8 @@ runs:
   using: 'docker'
   image: 'docker://busybox:latest'
   entrypoint: "ls"
-#  args:
+  args:
+    - "/"
 #    - ${{ inputs.yyy }}
 
 branding:
