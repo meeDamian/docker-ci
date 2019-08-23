@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "hello $1"
+echo hello "$@"
