@@ -21,7 +21,6 @@ jobs:
 #        name: containers
 #        path: out/
 
-      run: echo "$GITHUB_CONTEXT"
     - name: own action
       uses: meeDamian/docker-ci/sync-readme@master
       with:

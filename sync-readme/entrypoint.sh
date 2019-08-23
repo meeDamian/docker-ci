@@ -2,7 +2,9 @@
 
 set -e
 
-# Since Github doesn't seem to verify the `required` param, it has to be done here…
+#
+# Since Github doesn't seem to verify the `required: true` param, it has to be done here…
+#
 
 print_input_error() {
   >&2 printf "\n'%s' is required, and must be specified.\n" "$1"
