@@ -11,7 +11,8 @@ inputs:
   slug:
     description: "Docker Hub repository in the form of: <namespace>/<name>.  Github's slug used if not provided."
     required: false
-    default: ${GITHUB_REPOSITORY,,}
+    default: ${{ toJson(github) }}
+#    default: ${GITHUB_REPOSITORY,,}
 
 runs:
   using: 'docker'

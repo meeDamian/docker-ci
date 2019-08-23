@@ -23,6 +23,6 @@ jobs:
     - name: own action
       uses: meeDamian/docker-ci/sync-readme@master
       with:
-        xxx: 'abcd'
-        yyy: 'efgh'
+        username: xxxx
+        password: ${{ secrets.password }}
 
