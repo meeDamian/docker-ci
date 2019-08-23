@@ -1,4 +1,4 @@
-FROM busybox:1.31
+FROM alpine:3.10
 
 COPY entrypoint.sh /
 
