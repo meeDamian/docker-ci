@@ -21,14 +21,11 @@ jobs:
 #        name: containers
 #        path: out/
 
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
     - name: own action
       uses: meeDamian/docker-ci/sync-readme@master
       with:
         user: ${{ secrets.DOCKER_USER }}
         pass: ${{ secrets.DOCKER_PASS }}
-        slug: ${{ github.repository }}
+#        slug: ${{ github.repository }}
 
