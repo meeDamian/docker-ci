@@ -26,4 +26,5 @@ jobs:
       with:
         user: ${{ secrets.DOCKER_USER }}
         pass: ${{ secrets.DOCKER_PASS }}
+        slug: ${GITHUB_REPOSITORY,,}
 
