@@ -20,9 +20,10 @@ jobs:
 #      with:
 #        name: containers
 #        path: out/
+
     - name: own action
       uses: meeDamian/docker-ci/sync-readme@master
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
+        user: ${{ secrets.DOCKER_USER }}
+        pass: ${{ secrets.DOCKER_PASS }}
 

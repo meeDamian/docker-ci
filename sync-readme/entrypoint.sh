@@ -1,3 +1,8 @@
-#!/bin/sh
+#!/bin/sh -l
 
-echo "world | ${INPUT_USERNAME} | ${INPUT_PASSWORD} | ${INPUT_SLUG}"
+set -e
+
+# Since Github doesn't seem to
+
+echo "world | ${INPUT_USER} | ${INPUT_PASS} | ${INPUT_SLUG} | ${INPUT_README}"
+
