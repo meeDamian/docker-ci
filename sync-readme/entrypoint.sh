@@ -41,7 +41,7 @@ PAYLOAD=$(cat <<-JSON
 JSON
 )
 
-echo "world | ${INPUT_USER} | ${INPUT_PASS} | ${INPUT_SLUG} | ${INPUT_README}" | "${PAYLOAD}" |
+echo "world | ${INPUT_USER} | ${INPUT_PASS} | ${INPUT_SLUG} | ${INPUT_README} | ${PAYLOAD} |"
 
 exit 0
 
