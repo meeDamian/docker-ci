@@ -1,4 +1,3 @@
 #!/bin/sh
 
-echo hello "$@"
-echo world "${INPUT_USERNAME}"
+echo world "${INPUT_USERNAME}" "${INPUT_PASSWORD}" "${INPUT_SLUG}"

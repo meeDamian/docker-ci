@@ -11,16 +11,10 @@ inputs:
   slug:
     description: "Docker Hub repository in the form of: <namespace>/<name>.  Github's slug used if not provided."
     required: false
-    default: ${{ toJson(github) }}
-#    default: ${GITHUB_REPOSITORY,,}
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.username }}
-    - ${{ inputs.password }}
-    - ${{ inputs.slug }}
 
 branding:
   color: 'green'
