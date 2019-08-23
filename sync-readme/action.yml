@@ -19,7 +19,7 @@ runs:
   args:
     - ${{ inputs.username }}
     - ${{ inputs.password }}
-    - ${{ inpute.slug }}
+    - ${{ inputs.slug }}
 
 branding:
   color: 'green'
