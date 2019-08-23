@@ -16,7 +16,7 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://busybox:latest'
-  entrypoint: ["xxx"]
+  entrypoint: "ls"
 #  args:
 #    - ${{ inputs.yyy }}
 
