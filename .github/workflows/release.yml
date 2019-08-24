@@ -2,7 +2,7 @@ name: Release a new version
 on:
   push:
     tags:
-    - refs/tags/*
+      - refs/tags/*
 
 jobs:
   faster:
