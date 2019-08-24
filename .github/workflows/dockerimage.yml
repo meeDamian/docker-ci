@@ -6,8 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Dump GitHub context
-      run: echo "${{ toJson(github) }}"
+
     - name: Dump strategy context
       run: echo "${{ toJson(strategy) }}"
     - name: Dump matrix context
@@ -18,6 +17,8 @@ jobs:
       run: echo "${{ toJson(runner) }}"
     - name: Dump steps context
       run: echo "${{ toJson(steps) }}"
+    - name: Dump GitHub context
+      run: echo "${{ toJson(github) }}"
 
 #    - name: All
 #      run: docker build -t test --file Dockerfile .
