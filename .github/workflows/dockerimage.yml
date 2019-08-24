@@ -22,7 +22,7 @@ jobs:
 #        path: out/
 
     - name: own action
-      uses: meeDamian/docker-ci/sync-readme@master
+      uses: meeDamian/sync-readme@v1.0
       with:
         user: ${{ secrets.DOCKER_USER }}
         pass: ${{ secrets.DOCKER_PASS }}
