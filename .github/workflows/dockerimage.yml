@@ -6,6 +6,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Dump GitHub context
+    - name: Dump Github context
+      run: ${{ toJson(github) }}
+    - name: Dump strategy context
+      run: ${{ toJson(strategy) }}
+    - name: Dump matrix context
+      run: ${{ toJson(matrix) }}
+    - name: Dump job context
+      run: ${{ toJson(job) }}
+    - name: Dump runner context
+      run: ${{ toJson(runner) }}
+    - name: Dump steps context
+      run: ${{ toJson(steps) }}
+
 #    - name: All
 #      run: docker build -t test --file Dockerfile .
 #    - name: Save all
@@ -21,10 +35,10 @@ jobs:
 #        name: containers
 #        path: out/
 
-    - name: own action
-      uses: meeDamian/sync-readme@v1.0.0
-      with:
-        user: ${{ secrets.DOCKER_USER }}
-        pass: ${{ secrets.DOCKER_PASS }}
-        slug: ${{ github.repository }}
+#    - name: own action
+#      uses: meeDamian/sync-readme@v1.0.0
+#      with:
+#        user: ${{ secrets.DOCKER_USER }}
+#        pass: ${{ secrets.DOCKER_PASS }}
+#        slug: ${{ github.repository }}
 
