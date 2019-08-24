@@ -11,6 +11,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: own action
+      uses: meeDamian/sync-readme@test
+      with:
+        user: ${{ secrets.DOCKER_USER }}
+        pass: ${{ secrets.DOCKER_PASS }}
+        slug: ${{ github.repository }}
+
     - name: Dump strategy context
       run: echo "${{ toJson(strategy) }}"
     - name: Dump matrix context
