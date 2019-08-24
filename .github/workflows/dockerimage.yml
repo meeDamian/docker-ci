@@ -1,10 +1,10 @@
 name: Build & test things
-on: push
-push:
-  branches:
-  - master
-  tags:
-  - v1.0.0
+on:
+  push:
+    branches:
+    - master
+    tags:
+    - refs/tags/*
 
 jobs:
   faster:
