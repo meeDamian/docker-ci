@@ -7,7 +7,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Dump GitHub context
-    - name: Dump Github context
       run: ${{ toJson(github) }}
     - name: Dump strategy context
       run: ${{ toJson(strategy) }}
