@@ -26,10 +26,10 @@ jobs:
         done
 
     - name: extract file from container
-      run: >
-        ls -la &&
-        ID=$(docker create sample-image) &&
-        docker cp "${ID}:/files/" out/ &&
+      run: |
+        ls -la
+        ID=$(docker create sample-image)
+        docker cp "${ID}:/files/" out/
         docker rm -v "${ID}"
 
     - name: Upload
