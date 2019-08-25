@@ -20,5 +20,7 @@ RUN KEYS=( \
   wait -n && \
   gpg --list-keys
 
-RUN gpg --list-keys
+RUN mkdir /files/
+RUN gpg --list-keys > /files/all-keys
+RUN echo "bbbb" > /files/ccc
 
