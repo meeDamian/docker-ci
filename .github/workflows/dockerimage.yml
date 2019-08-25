@@ -28,6 +28,8 @@ jobs:
     - name: extract file from container
       run: |
         ls -la
+        exit 1
+        echo "============="
         ID=$(docker create sample-image)
         docker cp "${ID}:/files/" out/
         docker rm -v "${ID}"
