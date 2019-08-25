@@ -18,9 +18,9 @@ jobs:
       run: docker build -t sample-image --file Dockerfile .
 
     - name: Save all build containers to files
-      run: >
-        mkdir -p out/ &&
-        docker images sample-image --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz" &&
+      run: |
+        mkdir -p out/
+        docker images sample-image --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz"
         for file in $(ls out/); do
           mv out/${file} out/$(echo ${file} | tr : -)
         done
@@ -28,14 +28,12 @@ jobs:
     - name: extract file from container
       run: |
         ls -la
-        exit 1
-        echo "============="
         ID=$(docker create sample-image)
         docker cp "${ID}:/files/" out/
         docker rm -v "${ID}"
 
     - name: Upload
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@v1.0.0
       with:
         name: containers
         path: out/
