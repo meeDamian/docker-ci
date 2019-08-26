@@ -11,8 +11,19 @@ jobs:
   faster:
     name: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch:
+          - arm
+          - aarch64
+          - riscv32
+          - riscv64
+
     steps:
     - uses: actions/checkout@v1
+
+    - name: aaa
+      runs: echo ${{ matrix.arch }}
 
     - name: All
       run: docker build -t sample-image --file Dockerfile .
@@ -32,49 +43,11 @@ jobs:
         docker cp "${ID}:/files/" out/
         docker rm -v "${ID}"
 
-    - name: Update README & description on Docker Hub
-      id: a-unique-step-id
-      uses: meeDamian/sync-readme@step-output
-      with:
-        pass: ${{ secrets.DOCKER_PASS }}
-
     - name: Upload
       uses: actions/upload-artifact@v1.0.0
       with:
         name: containers
         path: out/
-
-    - name: Steps info
-      run: echo "${{ toJson(job) }}"
-
-    - name: Steps info
-      run: echo "${{ toJson(steps.a-unique-step-id) }}"
-
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-    - name: Dump strategy context
-      env:
-        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-      run: echo "$STRATEGY_CONTEXT"
-    - name: Dump matrix context
-      env:
-        MATRIX_CONTEXT: ${{ toJson(matrix) }}
-      run: echo "$MATRIX_CONTEXT"
-    - name: Dump job context
-      env:
-        JOB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$JOB_CONTEXT"
-    - name: Dump runner context
-      env:
-        RUNNER_CONTEXT: ${{ toJson(runner) }}
-      run: echo "$RUNNER_CONTEXT"
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
-
 
     - name: Update README & description on Docker Hub
       if: startsWith(github.ref, 'refs/tags/')
