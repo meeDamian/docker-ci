@@ -45,6 +45,9 @@ jobs:
         path: out/
 
     - name: Steps info
+      run: echo "${{ toJson(job.steps) }}"
+
+    - name: Steps info
       run: echo "${{ toJson(steps.a-unique-step-id) }}"
 
 
