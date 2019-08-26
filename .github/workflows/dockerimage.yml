@@ -32,6 +32,12 @@ jobs:
         docker cp "${ID}:/files/" out/
         docker rm -v "${ID}"
 
+    - name: Update README & description on Docker Hub
+      id: a-unique-step-id
+      uses: meeDamian/sync-readme@step-output
+      with:
+        pass: ${{ secrets.DOCKER_PASS }}
+
     - name: Upload
       uses: actions/upload-artifact@v1.0.0
       with:
