@@ -45,7 +45,7 @@ jobs:
         path: out/
 
     - name: Steps info
-      run: echo "${{ toJson(steps) }}"
+      run: echo "${{ toJson(steps.a-unique-step-id) }}"
 
 
     - name: Update README & description on Docker Hub
