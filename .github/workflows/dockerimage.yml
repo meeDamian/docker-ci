@@ -38,6 +38,9 @@ jobs:
         name: containers
         path: out/
 
+    - name: Steps info
+      run: echo "${{ steps }}"
+
 
     - name: Update README & description on Docker Hub
       if: startsWith(github.ref, 'refs/tags/')
