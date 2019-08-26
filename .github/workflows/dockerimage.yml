@@ -45,7 +45,7 @@ jobs:
         path: out/
 
     - name: Steps info
-      run: echo "${{ steps }}"
+      run: echo "${{ toJson(steps) }}"
 
 
     - name: Update README & description on Docker Hub
