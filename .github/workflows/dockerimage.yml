@@ -23,7 +23,11 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: aaa
-      run: echo ${{ matrix.arch }}
+      run: |
+        echo ${{ matrix.arch }}
+        go version
+        where go || which go
+
 
     - name: All
       run: docker build -t sample-image --file Dockerfile .
