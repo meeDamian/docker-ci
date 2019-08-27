@@ -35,36 +35,36 @@ jobs:
     - name: try to run risc-v
       run: docker run carlosedp/debian:sid-riscv64 uname -a
 
-    - name: All
-      run: docker build -t sample-image --file Dockerfile .
+#    - name: All
+#      run: docker build -t sample-image --file Dockerfile .
 
-    - name: Save all build containers to files
-      run: |
-        mkdir -p out/
-        docker images sample-image --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz"
-        for file in $(ls out/); do
-          mv out/${file} out/$(echo ${file} | tr : -)
-        done
-
-    - name: extract file from container
-      run: |
-        ls -la
-        ID=$(docker create sample-image)
-        docker cp "${ID}:/files/" out/
-        docker rm -v "${ID}"
-
-    - name: Upload
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: containers
-        path: out/
-
-    - name: Update README & description on Docker Hub
-      if: startsWith(github.ref, 'refs/tags/')
-      uses: meeDamian/sync-readme@v1.0.4
-      with:
-        pass: ${{ secrets.DOCKER_PASS }}
-        description: true
+#    - name: Save all build containers to files
+#      run: |
+#        mkdir -p out/
+#        docker images sample-image --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz"
+#        for file in $(ls out/); do
+#          mv out/${file} out/$(echo ${file} | tr : -)
+#        done
+#
+#    - name: extract file from container
+#      run: |
+#        ls -la
+#        ID=$(docker create sample-image)
+#        docker cp "${ID}:/files/" out/
+#        docker rm -v "${ID}"
+#
+#    - name: Upload
+#      uses: actions/upload-artifact@v1.0.0
+#      with:
+#        name: containers
+#        path: out/
+#
+#    - name: Update README & description on Docker Hub
+#      if: startsWith(github.ref, 'refs/tags/')
+#      uses: meeDamian/sync-readme@v1.0.4
+#      with:
+#        pass: ${{ secrets.DOCKER_PASS }}
+#        description: true
 
 
 
