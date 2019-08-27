@@ -26,8 +26,12 @@ jobs:
       run: |
         echo ${{ matrix.arch }}
         go version
-        where go || which go
 
+    - name: Enable emulation
+      run: docker run --rm --privileged meedamian/simple-qemu:v4.1.0 --reset -p yes
+
+    - name: try to run risc-v
+      run: docker run carlosedp/whoami:riscv64
 
     - name: All
       run: docker build -t sample-image --file Dockerfile .
