@@ -27,8 +27,8 @@ jobs:
       run: |
         GIT_VER="$(echo ${GITHUB_REF} | awk -F/ '{print $NF}')"
         FILE_VER="$(cat ./VERSION)"
-        if [ "${GIT_VER" != "${FILE_VER}" ]; then
-          printf "\nVersion mismatch!  Tagged as %s, while file claims %s\n\n" "${GIT_VER" "${FILE_VER}"
+        if [ "${GIT_VER}" != "${FILE_VER}" ]; then
+          printf "\nVersion mismatch!  Tagged as %s, while file claims %s\n\n" "${GIT_VER}" "${FILE_VER}"
           exit 1
         fi
 
