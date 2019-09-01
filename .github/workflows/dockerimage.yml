@@ -15,9 +15,9 @@ jobs:
       matrix:
         arch:
           - arm
-          - aarch64
-          - riscv32
-          - riscv64
+#          - aarch64
+#          - riscv32
+#          - riscv64
 
     steps:
     - uses: actions/checkout@v1
@@ -25,7 +25,7 @@ jobs:
     - uses: meeDamian/github-release@1.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: v0.66.66
+        tag: v0.66.67
         files: Dockerfile
 
 
