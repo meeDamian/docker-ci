@@ -25,19 +25,19 @@ jobs:
     - uses: meeDamian/github-release@1.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: v0.66.67
+        tag: v0.66.68
         files: Dockerfile
 
 
 
 
-    - name: Enable emulation
-      run: |
-        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-#        docker run --rm --privileged meedamian/simple-qemu:v4.1 --reset -p yes
-
-    - name: try to run risc-v
-      run: docker run carlosedp/debian:sid-riscv64 uname -a
+#    - name: Enable emulation
+#      run: |
+#        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+##        docker run --rm --privileged meedamian/simple-qemu:v4.1 --reset -p yes
+#
+#    - name: try to run risc-v
+#      run: docker run carlosedp/debian:sid-riscv64 uname -a
 
 #    - name: All
 #      run: docker build -t sample-image --file Dockerfile .
