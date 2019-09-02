@@ -22,6 +22,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - run: docker manifest inspect alpine
+
     - run: |
         mkdir -p ~/.docker
 
