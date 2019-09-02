@@ -11,10 +11,10 @@ jobs:
   faster:
     name: build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        arch:
-          - arm
+#    strategy:
+#      matrix:
+#        arch:
+#          - arm
 #          - aarch64
 #          - riscv32
 #          - riscv64
@@ -22,11 +22,20 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - uses: meeDamian/github-release@1.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag: v0.66.69
-        files: Dockerfile
+    - run: |
+        mkdir -p ~/.docker
+
+        echo '{ "experimental": "enabled" }' > ~/.docker/config.json
+        sudo systemctl restart docker
+        docker version
+
+#    - run: ls aaa/* | sha256sum
+#
+#    - uses: meeDamian/github-release@1.0
+#      with:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        tag: v0.66.69
+#        files: Dockerfile
 
 
 
