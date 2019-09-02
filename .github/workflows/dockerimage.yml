@@ -22,14 +22,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - run: docker manifest inspect alpine
-
     - run: |
         mkdir -p ~/.docker
 
         echo '{ "experimental": "enabled" }' > ~/.docker/config.json
         sudo systemctl restart docker
         docker version
+
+    - run: docker manifest inspect alpine
 
 #    - run: ls aaa/* | sha256sum
 #
