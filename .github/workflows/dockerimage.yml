@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Login to Github Registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u="${GITHUB_ACTOR,,}" --password-stdin
+      run: docker login docker.pkg.github.com -u meedamian -p "${{ secrets.GITHUB_TOKEN }}"
 
     - name: Push all images to Github Registry
       run: |
