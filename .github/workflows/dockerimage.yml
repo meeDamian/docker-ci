@@ -22,13 +22,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - run: |
-        echo "command one"
-        echo "command two"
+    - name: Login to Github Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u="${GITHUB_ACTOR,,}" --password-stdin
 
-    - run: >
-        echo
-          "command three"
+    - name: Push all images to Github Registry
+      run: |
+        docker pull alpine:3.10
+        docker tag alpine:3.10 docker.pkg.github.com/meedamian/trashpanda:0.0.1
+        docker push docker.pkg.github.com/meedamian/trashpanda:0.0.1
 
 #    - run: ls aaa/* | sha256sum
 #
