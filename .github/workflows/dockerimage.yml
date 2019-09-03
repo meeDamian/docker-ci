@@ -31,6 +31,13 @@ jobs:
 
     - run: docker manifest inspect alpine
 
+    - name: Sync README.md with Docker Hub
+      uses: meeDamian/sync-readme@v1.0.5
+      with:
+        pass: ${{ secrets.DOCKER_PASS }}
+        slug: ${{ ${GITHUB_REPOSITORY/docker-} }}
+        description: true
+
 #    - run: ls aaa/* | sha256sum
 #
 #    - uses: meeDamian/github-release@1.0
