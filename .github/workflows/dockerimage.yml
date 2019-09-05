@@ -1,11 +1,12 @@
 name: build
 
-#on:
-#  push:
-#    branches:
-#    - master
-
-on: push
+# Let's hope it prevents builds on package push…
+on:
+  push:
+    branches:
+    - master
+    tags:
+    - '*'
 
 jobs:
   faster:
