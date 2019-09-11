@@ -9,9 +9,14 @@ on:
     - '*'
 
 jobs:
-  faster:
+  a-job:
     name: build
     runs-on: ubuntu-latest
+    container:
+      image: alpine:3.10
+      env:
+        BLABSON: yadadada
+
 #    strategy:
 #      matrix:
 #        arch:
@@ -23,15 +28,46 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Login to Github Registry
-      run: docker login docker.pkg.github.com -u meedamian -p "${{ secrets.YET_ANOTHER_GITHUB_TOKEN }}"
+    - uses: meeDamian/github-actions-bugs/.github/actions/action-with-output@29cd36f
+      id: outputter
 
-    - name: Push all images to Github Registry
-      run: |
-        docker pull alpine:3.10
-        docker tag alpine:3.10 docker.pkg.github.com/meedamian/trashpanda:0.0.1
-        docker push docker.pkg.github.com/meedamian/trashpanda:0.0.1
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Dump job context
+      env:
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: echo "$JOB_CONTEXT"
+    - name: Dump steps context
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
+    - name: Dump runner context
+      env:
+        RUNNER_CONTEXT: ${{ toJson(runner) }}
+      run: echo "$RUNNER_CONTEXT"
+    - name: Dump strategy context
+      env:
+        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+      run: echo "$STRATEGY_CONTEXT"
+    - name: Dump matrix context
+      env:
+        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      run: echo "$MATRIX_CONTEXT"
 
+    - name: Last Dump
+      run: echo "${BLABSON}"
+
+#    - name: Login to Github Registry
+#      run: docker login docker.pkg.github.com -u meedamian -p "${{ secrets.YET_ANOTHER_GITHUB_TOKEN }}"
+#
+#    - name: Push all images to Github Registry
+#      run: |
+#        docker pull alpine:3.10
+#        docker tag alpine:3.10 docker.pkg.github.com/meedamian/trashpanda:0.0.1
+#        docker push docker.pkg.github.com/meedamian/trashpanda:0.0.1
+#
 #    - run: ls aaa/* | sha256sum
 #
 #    - uses: meeDamian/github-release@1.0
