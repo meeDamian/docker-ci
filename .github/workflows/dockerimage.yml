@@ -16,6 +16,7 @@ jobs:
       image: alpine:3.10
       env:
         BLABSON: yadadada
+      options: -t
 
 #    strategy:
 #      matrix:
