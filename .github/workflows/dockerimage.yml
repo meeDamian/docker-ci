@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - uses: meeDamian/github-actions-bugs/.github/actions/action-with-output@29cd36f
+    - uses: meeDamian/github-actions-bugs/.github/actions/action-with-output@ed0cd91
       id: outputter
 
     - name: Dump GitHub context
