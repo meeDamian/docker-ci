@@ -56,6 +56,30 @@ jobs:
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
       run: echo "$MATRIX_CONTEXT"
 
+
+    - name: Create release
+      uses: meeDamian/github-release@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: 'v0.0.1-test-update'
+        commitish: ${{github.sha}}
+        name: aaa
+        body: aaa
+        draft: true
+        prerelease: true
+
+    - name: Create release
+      uses: meeDamian/github-release@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: 'v0.0.1-test-update'
+        name: bbb
+        body: bbb
+        draft: false
+        prerelease: false
+
+
+
 #    - name: Login to Github Registry
 #      run: docker login docker.pkg.github.com -u meedamian -p "${{ secrets.YET_ANOTHER_GITHUB_TOKEN }}"
 #
