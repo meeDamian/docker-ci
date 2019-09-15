@@ -27,6 +27,7 @@ jobs:
     - name: Does that work?
       env:
         AAA: aaa
+      run: echo ""
 
     - run: echo "${AAA}"
 
