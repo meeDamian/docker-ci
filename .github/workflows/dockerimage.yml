@@ -54,20 +54,20 @@ jobs:
       uses: meeDamian/github-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.7-test-update'
+        tag: 'v0.0.8-test-update'
         commitish: ${{ github.sha }}
-        name: 1
-        body: 11
-        prerelease: false
+        name: 8
+        body: 88
+        prerelease: true
 
     - name: Update release
       uses: meeDamian/github-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.7-test-update'
-        name: 2
-        body: 22
-        prerelease: true
+        tag: 'v0.0.8-test-update'
+        name: 88
+        body: 888
+        prerelease: false
         allow_override: true
 
 
