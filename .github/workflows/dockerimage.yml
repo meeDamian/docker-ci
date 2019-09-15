@@ -24,8 +24,18 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - uses: meeDamian/github-actions-bugs/.github/actions/action-with-output@ed0cd91
-      id: outputter
+    - name: Does that work?
+      env:
+        AAA: aaa
+
+    - run: echo "${AAA}"
+
+    - name: AAAAAAAAAA
+      id: vals
+      runs: |
+        echo ::set-output name=time::$time
+        echo ::set-output name=time::$time
+
 
     - name: Dump GitHub context
       env:
