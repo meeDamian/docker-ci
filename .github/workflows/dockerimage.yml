@@ -31,13 +31,6 @@ jobs:
 
     - run: echo "${AAA}"
 
-    - name: AAAAAAAAAA
-      id: vals
-      runs: |
-        echo ::set-output name=time::$time
-        echo ::set-output name=time::$time
-
-
     - name: Dump GitHub context
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
