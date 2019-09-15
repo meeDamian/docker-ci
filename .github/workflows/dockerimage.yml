@@ -54,18 +54,18 @@ jobs:
       uses: meeDamian/github-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.5-test-update'
+        tag: 'v0.0.6-test-update'
         commitish: ${{github.sha}}
-        name: ffffff
-        body: ggggggg
+        name: jjjjjjjjjj
+        body: kkkkkkkkkkk
 
     - name: Update release
       uses: meeDamian/github-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.5-test-update'
-        name: hhhhhhhh
-        body: iiiiiiiii
+        tag: 'v0.0.6-test-update'
+        name: JJJJJJJJJJ
+        body: KKKKKKKKKKK
         allow_override: true
 
 
