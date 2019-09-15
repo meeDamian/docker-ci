@@ -54,7 +54,7 @@ jobs:
       uses: meeDamian/github-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.2-test-update'
+        tag: 'v0.0.3-test-update'
         commitish: ${{github.sha}}
         name: ccc
         body: ccc
@@ -65,7 +65,7 @@ jobs:
       uses: meeDamian/github-release@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.2-test-update'
+        tag: 'v0.0.3-test-update'
         name: dddd
         body: dddd
         draft: false
