@@ -11,8 +11,6 @@ on:
 jobs:
   a-job:
     name: build
-    env:
-      VERSION: AAA
 
     runs-on: ubuntu-latest
 
@@ -28,8 +26,8 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Try preparing env
-      id: xxx
-      run: echo ::set-output name=yyy::"zzz"
+      id: env
+      run: echo ::set-output name=version::"$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
 
     - name: Check job env var
       run: echo ${{steps.xxx.outputs.yyy}}
