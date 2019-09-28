@@ -12,7 +12,8 @@ jobs:
   a-job:
     name: build
     env:
-      VERSION: echo "aaa"
+      VERSION: echo "bla/bal" | cut -d/ -f2
+
     runs-on: ubuntu-latest
 
 #    strategy:
@@ -27,7 +28,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: check job env var
-      run: echo "${VERSION}"
+      run: echo "~~ ${VERSION} ~~"
 
 #    - name: Dump GitHub context
 #      env:
