@@ -11,6 +11,8 @@ on:
 jobs:
   a-job:
     name: build
+    env:
+      VERSION: echo "aaa"
     runs-on: ubuntu-latest
 
 #    strategy:
@@ -22,8 +24,11 @@ jobs:
 #          - riscv64
 
     steps:
-#    - uses: actions/checkout@v1
-#
+    - uses: actions/checkout@v1
+
+    - name: check job env var
+      run: echo "${VERSION}"
+
 #    - name: Dump GitHub context
 #      env:
 #        GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -50,35 +55,35 @@ jobs:
 #      run: echo "$MATRIX_CONTEXT"
 
 
-    - name: Create release
-      uses: meeDamian/github-release@master
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.11-test-update'
-        commitish: ${{ github.sha }}
-        name: 11
-        body: 11
-        prerelease: true
-
-    - name: Print Release
-      run: >
-        curl -s https://api.github.com/repos/meeDamian/docker-ci/releases/tags/v0.0.11-test-update
-        | jq '. | { id, tag_name, name, body, prerelease }'
-
-    - name: Update release
-      uses: meeDamian/github-release@master
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag: 'v0.0.11-test-update'
-        name: 8891011
-        body: 88891011
-        prerelease: false
-        allow_override: true
-
-    - name: Print Release
-      run: >
-        curl -s https://api.github.com/repos/meeDamian/docker-ci/releases/tags/v0.0.11-test-update
-        | jq '. | { id, tag_name, name, body, prerelease }'
+#    - name: Create release
+#      uses: meeDamian/github-release@master
+#      with:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        tag: 'v0.0.11-test-update'
+#        commitish: ${{ github.sha }}
+#        name: 11
+#        body: 11
+#        prerelease: true
+#
+#    - name: Print Release
+#      run: >
+#        curl -s https://api.github.com/repos/meeDamian/docker-ci/releases/tags/v0.0.11-test-update
+#        | jq '. | { id, tag_name, name, body, prerelease }'
+#
+#    - name: Update release
+#      uses: meeDamian/github-release@master
+#      with:
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        tag: 'v0.0.11-test-update'
+#        name: 8891011
+#        body: 88891011
+#        prerelease: false
+#        allow_override: true
+#
+#    - name: Print Release
+#      run: >
+#        curl -s https://api.github.com/repos/meeDamian/docker-ci/releases/tags/v0.0.11-test-update
+#        | jq '. | { id, tag_name, name, body, prerelease }'
 
 
 
