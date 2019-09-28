@@ -12,7 +12,7 @@ jobs:
   a-job:
     name: build
     env:
-      VERSION: echo "bla/bal" | cut -d/ -f2
+      VERSION: AAA
 
     runs-on: ubuntu-latest
 
@@ -27,8 +27,17 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: check job env var
-      run: eval "${VERSION}"
+    - name: Check job env var
+      run: VERSION="BBB"
+
+    - name: Print job env var
+      run: echo ${VERSION}
+
+    - name: Check job env var
+      run: export VERSION="CCC"
+
+    - name: Print job env var
+      run: echo ${VERSION}
 
 #    - name: Dump GitHub context
 #      env:
