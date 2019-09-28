@@ -12,7 +12,7 @@ jobs:
   a-job:
     name: build
     env:
-      VERSION: $(echo "bla/bal" | cut -d/ -f2)
+      VERSION: echo "bla/bal" | cut -d/ -f2
 
     runs-on: ubuntu-latest
 
