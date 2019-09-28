@@ -32,7 +32,7 @@ jobs:
         echo ::set-output name=version::"$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
 
     - name: Check job env var
-      run: echo ${{steps.xxx.outputs.yyy}}
+      run: echo ${{steps.env.outputs.version}}
 
 
 #    - name: Dump GitHub context
