@@ -27,17 +27,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Check job env var
-      run: VERSION="BBB"
-
-    - name: Print job env var
-      run: echo ${VERSION}
+    - name: Try preparing env
+      id: xxx
+      run: echo ::set-output name=yyy::"zzz"
 
     - name: Check job env var
-      run: export VERSION="CCC"
+      run: echo ${{steps.xxx.outputs.yyy}}
 
-    - name: Print job env var
-      run: echo ${VERSION}
 
 #    - name: Dump GitHub context
 #      env:
