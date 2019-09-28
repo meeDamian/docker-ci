@@ -28,7 +28,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: check job env var
-      run: eval ${VERSION}
+      run: ${VERSION}
 
 #    - name: Dump GitHub context
 #      env:
