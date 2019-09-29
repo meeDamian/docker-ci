@@ -39,6 +39,9 @@ jobs:
         echo ::set-env name=COMMIT_HASH::"${GITHUB_SHA:0:16}"
         echo ::set-env name=SLUG::"$(echo "${GITHUB_REPOSITORY,,}" | sed 's/docker-//')"
 
+    - name: dsaaaaaaaaaa
+      run: echo "~~ ${{DOCKER_USER}} ~~ ${{SLUG}} ~~"
+
     - name: Dump GitHub context
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
