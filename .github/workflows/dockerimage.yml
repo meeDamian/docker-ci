@@ -28,7 +28,7 @@ jobs:
     - name: Setup environment
       run: |
         echo "${GITHUB_REF}"
-        echo ::set-env name=INPUT_TAG::"v6.6.6"
+        echo ::set-env name=GIT_TAG::"v6.6.6"
 
     - uses: meeDamian/github-release@check-env
       with:
