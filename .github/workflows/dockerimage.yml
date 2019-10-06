@@ -30,7 +30,7 @@ jobs:
         echo "${GITHUB_REF}"
         echo ::set-env name=INPUT_TAG::"v6.6.6"
 
-    - uses: meeDamian/github-release@635d8d8
+    - uses: meeDamian/github-release@check-env
       with:
         token: ${{secrets.GITHUB_TOKEN}}
 
