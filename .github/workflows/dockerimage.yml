@@ -49,9 +49,7 @@ jobs:
 #    - name: dsaaaaaaaaaa
 #      run: echo "~~ ${{DOCKER_USER}} ~~ ${{SLUG}} ~~"
 #
-    - name: Try DAT
-      if: ${{ ${MONKEY} == "eats-bananas" }}
-      run: echo "ok"
+
 
     - name: Dump GitHub context
       env:
