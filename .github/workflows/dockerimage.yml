@@ -25,11 +25,21 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Setup environment
-      run: |
-        echo "${GITHUB_REF}"
-        echo ::set-env name=GIT_TAG::"v6.6.6"
-        echo ::set-env name=MONKEY::"eats-bananas"
+    - uses: meeDamian/sync-readme@docker-token
+      with:
+        pass: ${{ secrets.DOCKER_TOKEN }}
+        description: true
+
+    - uses: meeDamian/sync-readme@v1.0.5
+      with:
+        pass: ${{ secrets.DOCKER_TOKEN }}
+        description: true
+
+#    - name: Setup environment
+#      run: |
+#        echo "${GITHUB_REF}"
+#        echo ::set-env name=GIT_TAG::"v6.6.6"
+#        echo ::set-env name=MONKEY::"eats-bananas"
 
 
 #    - name: Try preparing env
@@ -51,49 +61,49 @@ jobs:
 #
 
 
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-
-    - name: Dump env context
-      env:
-        ENV_CONTEXT: ${{ toJson(env) }}
-      run: echo "$ENV_CONTEXT"
-
-    - name: Dump job context
-      env:
-        JOB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$JOB_CONTEXT"
-
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
-
-    - name: Dump runner context
-      env:
-        RUNNER_CONTEXT: ${{ toJson(runner) }}
-      run: echo "$RUNNER_CONTEXT"
-
-    - name: Dump secrets context
-      env:
-        SECRETS_CONTEXT: ${{ toJson(secrets) }}
-      run: echo "$SECRETS_CONTEXT"
-
-    - name: Dump strategy context
-      env:
-        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-      run: echo "$STRATEGY_CONTEXT"
-
-    - name: Dump matrix context
-      env:
-        MATRIX_CONTEXT: ${{ toJson(matrix) }}
-      run: echo "$MATRIX_CONTEXT"
-
-    - name:  Test env vars in ifs
-      if: env.GIT_TAG != 'v6.6.6'
-      run: echo "Not hell"
+#    - name: Dump GitHub context
+#      env:
+#        GITHUB_CONTEXT: ${{ toJson(github) }}
+#      run: echo "$GITHUB_CONTEXT"
+#
+#    - name: Dump env context
+#      env:
+#        ENV_CONTEXT: ${{ toJson(env) }}
+#      run: echo "$ENV_CONTEXT"
+#
+#    - name: Dump job context
+#      env:
+#        JOB_CONTEXT: ${{ toJson(job) }}
+#      run: echo "$JOB_CONTEXT"
+#
+#    - name: Dump steps context
+#      env:
+#        STEPS_CONTEXT: ${{ toJson(steps) }}
+#      run: echo "$STEPS_CONTEXT"
+#
+#    - name: Dump runner context
+#      env:
+#        RUNNER_CONTEXT: ${{ toJson(runner) }}
+#      run: echo "$RUNNER_CONTEXT"
+#
+#    - name: Dump secrets context
+#      env:
+#        SECRETS_CONTEXT: ${{ toJson(secrets) }}
+#      run: echo "$SECRETS_CONTEXT"
+#
+#    - name: Dump strategy context
+#      env:
+#        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+#      run: echo "$STRATEGY_CONTEXT"
+#
+#    - name: Dump matrix context
+#      env:
+#        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+#      run: echo "$MATRIX_CONTEXT"
+#
+#    - name:  Test env vars in ifs
+#      if: env.GIT_TAG != 'v6.6.6'
+#      run: echo "Not hell"
 
 
 #    - name: Create release
