@@ -27,7 +27,7 @@ jobs:
 
     - uses: meeDamian/sync-readme@docker-token
       with:
-        pass: ${{ secrets.DOCKER_TOKEN }}
+        pass: ${{ secrets.DOCKER_PASS }}
         description: true
 
     - uses: meeDamian/sync-readme@v1.0.5
