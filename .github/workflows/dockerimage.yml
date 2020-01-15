@@ -100,7 +100,7 @@ jobs:
           echo "~~~"
           cat ./all-stats
 
-          echo ::set-env name=XXX::"$(cat ./all-stats)"
+          echo ::set-env name=XXX::"$(cat ./all-stats | sed -z 's/\n/\\n/g')"
 
       - uses: actions/github-script@0.4.0
         with:
