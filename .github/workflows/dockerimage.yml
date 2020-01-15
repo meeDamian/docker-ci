@@ -82,14 +82,19 @@ jobs:
       - name: Aggregate results
         run: |
           touch ./all-stats
-          echo "| version | arch | time" >> ./all-stats
-          echo "|---------|------|------" >> ./all-stats
 
-          for file in $(ls ./stats/*); do
-            VER="$(basename "${file}" | cut -d- -f1)"
-            ARCH="$(basename "${file}" | cut -d- -f2)"
-            TIME="$(cat ${file} | tr -d '\n')"
-            echo "| ${VER} | ${ARCH} | ${TIME}" >> ./all-stats
+          echo "| version | arm | aarch64 | riscv32 | riscv64" >> ./all-stats
+          echo "|---------|-----|---------|---------|---------" >> ./all-stats
+
+          for ver in $(ls ./stats/* | awk -F/ '{print $NF}' | cut -d- -f1 | uniq); do
+            line="${ver}"
+
+            line="${line} | $(cat ./stats/${ver}-arm | tr -d '\n')"
+            line="${line} | $(cat ./stats/${ver}-aarch64 | tr -d '\n')"
+            line="${line} | $(cat ./stats/${ver}-riscv32 | tr -d '\n')"
+            line="${line} | $(cat ./stats/${ver}-riscv64 | tr -d '\n')"
+            
+            echo "${line}" >> ./all-stats
           done
 
           cat ./all-stats
