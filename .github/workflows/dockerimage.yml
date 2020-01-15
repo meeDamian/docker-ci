@@ -63,11 +63,11 @@ jobs:
 
         echo "${OUT}" > stat/${{matrix.qemu}}-${{matrix.arch}}
 
-        - name: Save execution time as an artifact
-          uses: actions/upload-artifact@v1.0.0
-          with:
-            name: stats
-            path: stat/
+    - name: Save execution time as an artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: stats
+        path: stat/
 
   comment:
     name: Report result
