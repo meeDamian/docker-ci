@@ -9,193 +9,97 @@ on:
     - '*'
 
 jobs:
-  a-job:
+  build:
     name: build
-
     runs-on: ubuntu-latest
 
-#    strategy:
-#      matrix:
-#        arch:
-#          - arm
-#          - aarch64
-#          - riscv32
-#          - riscv64
+    strategy:
+      matrix:
+        arch:
+          - arm
+          - aarch64
+          - riscv32
+          - riscv64
+
+        qemu:
+          - v4.2.0
+          - v4.1.1
 
     steps:
     - uses: actions/checkout@v1
 
-    - uses: meeDamian/sync-readme@docker-token
-      with:
-        pass: ${{ secrets.DOCKER_PASS }}
-        description: true
+    - name: Log start time
+      run: touch /tmp/start
 
-    - uses: meeDamian/sync-readme@v1.0.5
-      with:
-        pass: ${{ secrets.DOCKER_TOKEN }}
-        description: true
+    - name: sleep
+      run: sleep 5
 
-#    - name: Setup environment
-#      run: |
-#        echo "${GITHUB_REF}"
-#        echo ::set-env name=GIT_TAG::"v6.6.6"
-#        echo ::set-env name=MONKEY::"eats-bananas"
+    - name: Calculate execution time
+      run: |
+        START=$(date -r /tmp/start +%s)
+        NOW=$(date +%s)
 
+        DIFF=$(( NOW - START ))
 
-#    - name: Try preparing env
-#      id: env
-#      run: |
-#        echo "${GITHUB_REF}"
-#        echo ::set-output name=version::"$(echo "${GITHUB_REF}" | awk -F/ '{print $NF}')"
-#
-#    - name: Check job env var
-#      run: echo ${{steps.env.outputs.version}}
-#    - name: Setup environment
-#      run: |
-#        echo ::set-env name=DOCKER_USER::"${GITHUB_ACTOR,,}"
-#        echo ::set-env name=COMMIT_HASH::"${GITHUB_SHA:0:16}"
-#        echo ::set-env name=SLUG::"$(echo "${GITHUB_REPOSITORY,,}" | sed 's/docker-//')"
+        SEC=1
+        MIN=$(( 60 * SEC ))
+        HOUR=$(( 60 * MIN ))
+        DAY=$(( 24 * HOUR ))
 
-#    - name: dsaaaaaaaaaa
-#      run: echo "~~ ${{DOCKER_USER}} ~~ ${{SLUG}} ~~"
-#
+        secs=$(( DIFF % 60 ))
+        mins=$(( $(( DIFF / MIN )) % 60 ))
+        hours=$(( $(( DIFF / HOUR )) % 24 ))
+        days=$(( DIFF / DAY ))
 
+        OUT=""
+        if [[ "${days}" -ne "0" ]]; then
+        # Days-long jobs shouldn't happen, but 🤷🏻‍♂️
+        OUT="${days}d "
+        fi
 
-#    - name: Dump GitHub context
-#      env:
-#        GITHUB_CONTEXT: ${{ toJson(github) }}
-#      run: echo "$GITHUB_CONTEXT"
-#
-#    - name: Dump env context
-#      env:
-#        ENV_CONTEXT: ${{ toJson(env) }}
-#      run: echo "$ENV_CONTEXT"
-#
-#    - name: Dump job context
-#      env:
-#        JOB_CONTEXT: ${{ toJson(job) }}
-#      run: echo "$JOB_CONTEXT"
-#
-#    - name: Dump steps context
-#      env:
-#        STEPS_CONTEXT: ${{ toJson(steps) }}
-#      run: echo "$STEPS_CONTEXT"
-#
-#    - name: Dump runner context
-#      env:
-#        RUNNER_CONTEXT: ${{ toJson(runner) }}
-#      run: echo "$RUNNER_CONTEXT"
-#
-#    - name: Dump secrets context
-#      env:
-#        SECRETS_CONTEXT: ${{ toJson(secrets) }}
-#      run: echo "$SECRETS_CONTEXT"
-#
-#    - name: Dump strategy context
-#      env:
-#        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-#      run: echo "$STRATEGY_CONTEXT"
-#
-#    - name: Dump matrix context
-#      env:
-#        MATRIX_CONTEXT: ${{ toJson(matrix) }}
-#      run: echo "$MATRIX_CONTEXT"
-#
-#    - name:  Test env vars in ifs
-#      if: env.GIT_TAG != 'v6.6.6'
-#      run: echo "Not hell"
+        OUT="${OUT}${hours}h:${mins}m:${secs}s"
 
+        mkdir -p stat
 
-#    - name: Create release
-#      uses: meeDamian/github-release@master
-#      with:
-#        token: ${{ secrets.GITHUB_TOKEN }}
-#        tag: 'v0.0.11-test-update'
-#        commitish: ${{ github.sha }}
-#        name: 11
-#        body: 11
-#        prerelease: true
-#
-#    - name: Print Release
-#      run: >
-#        curl -s https://api.github.com/repos/meeDamian/docker-ci/releases/tags/v0.0.11-test-update
-#        | jq '. | { id, tag_name, name, body, prerelease }'
-#
-#    - name: Update release
-#      uses: meeDamian/github-release@master
-#      with:
-#        token: ${{ secrets.GITHUB_TOKEN }}
-#        tag: 'v0.0.11-test-update'
-#        name: 8891011
-#        body: 88891011
-#        prerelease: false
-#        allow_override: true
-#
-#    - name: Print Release
-#      run: >
-#        curl -s https://api.github.com/repos/meeDamian/docker-ci/releases/tags/v0.0.11-test-update
-#        | jq '. | { id, tag_name, name, body, prerelease }'
+        echo "${OUT}" > stat/${{matrix.qemu}}-${{matrix.arch}}
 
+        - name: Save execution time as an artifact
+          uses: actions/upload-artifact@v1.0.0
+          with:
+            name: stats
+            path: stat/
 
+  comment:
+    name: Report result
+    needs: build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Download perf stats
+        uses: actions/download-artifact@v1.0.0
+        with:
+          name: stats
 
-#    - name: Login to Github Registry
-#      run: docker login docker.pkg.github.com -u meedamian -p "${{ secrets.YET_ANOTHER_GITHUB_TOKEN }}"
-#
-#    - name: Push all images to Github Registry
-#      run: |
-#        docker pull alpine:3.10
-#        docker tag alpine:3.10 docker.pkg.github.com/meedamian/trashpanda:0.0.1
-#        docker push docker.pkg.github.com/meedamian/trashpanda:0.0.1
-#
-#    - run: ls aaa/* | sha256sum
-#
-#    - uses: meeDamian/github-release@1.0
-#      with:
-#        token: ${{ secrets.GITHUB_TOKEN }}
-#        tag: v0.66.69
-#        files: Dockerfile
+      - name: Aggregate results
+        run: |
+          touch ./all-stats
+          echo "| version | arch | time" >> ./all-stats
+          echo "|---------|------|------" >> ./all-stats
 
+          for file in $(ls ./stats/*); do
+            VER="$(echo "${file}" | cut -d- -f1)"
+            ARCH="$(echo "${file}" | cut -d- -f2)"
+            TIME="$(cat stats/${file} | tr -d '\n')"
+            echo "| ${VER} | ${ARCH} | ${TIME}" >> ./all-stats
+          done
 
-
-
-#    - name: Enable emulation
-#      run: |
-#        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-##        docker run --rm --privileged meedamian/simple-qemu:v4.1 --reset -p yes
-#
-#    - name: try to run risc-v
-#      run: docker run carlosedp/debian:sid-riscv64 uname -a
-
-#    - name: All
-#      run: docker build -t sample-image --file Dockerfile .
-
-#    - name: Save all build containers to files
-#      run: |
-#        mkdir -p out/
-#        docker images sample-image --format "{{.Repository}}:{{.Tag}}" | xargs -I% sh -c "docker save % | gzip > out/%.tgz"
-#        for file in $(ls out/); do
-#          mv out/${file} out/$(echo ${file} | tr : -)
-#        done
-#
-#    - name: extract file from container
-#      run: |
-#        ls -la
-#        ID=$(docker create sample-image)
-#        docker cp "${ID}:/files/" out/
-#        docker rm -v "${ID}"
-#
-#    - name: Upload
-#      uses: actions/upload-artifact@v1.0.0
-#      with:
-#        name: containers
-#        path: out/
-#
-#    - name: Update README & description on Docker Hub
-#      if: startsWith(github.ref, 'refs/tags/')
-#      uses: meeDamian/sync-readme@v1.0.4
-#      with:
-#        pass: ${{ secrets.DOCKER_PASS }}
-#        description: true
-
-
-
+      - uses: actions/github-script@0.4.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          debug: true
+          script: |
+            github.issues.createComment({
+              issue_number: 9,
+              owner: context.owner,
+              repo: context.repo,
+              body: '👋 Thanks for reporting!'
+            })
