@@ -88,9 +88,11 @@ jobs:
           for file in $(ls ./stats/*); do
             VER="$(echo "${file}" | cut -d- -f1)"
             ARCH="$(echo "${file}" | cut -d- -f2)"
-            TIME="$(cat stats/${file} | tr -d '\n')"
+            TIME="$(cat ${file} | tr -d '\n')"
             echo "| ${VER} | ${ARCH} | ${TIME}" >> ./all-stats
           done
+
+          cat ./all-stats
 
       - uses: actions/github-script@0.4.0
         with:
