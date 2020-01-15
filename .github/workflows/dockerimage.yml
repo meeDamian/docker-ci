@@ -94,6 +94,8 @@ jobs:
 
           cat ./all-stats
 
+          echo ::set-env name=XXX::"$(cat ./all-stats)"
+
       - uses: actions/github-script@0.4.0
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -103,5 +105,5 @@ jobs:
               issue_number: 1,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
+              body: '👋 Thanks for reporting!' + process.env.XXX
             })
