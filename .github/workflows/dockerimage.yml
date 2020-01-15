@@ -84,7 +84,7 @@ jobs:
           touch ./all-stats
 
           echo "| version | arm | aarch64 | riscv32 | riscv64" >> ./all-stats
-          echo "|---------|-----|---------|---------|---------" >> ./all-stats
+          echo "|:-------:|----:|--------:|--------:|--------:" >> ./all-stats
 
           for ver in $(ls ./stats/* | awk -F/ '{print $NF}' | cut -d- -f1 | uniq); do
             line="| ${ver}"
@@ -97,7 +97,6 @@ jobs:
             echo "${line}" >> ./all-stats
           done
 
-          echo "~~~"
           cat ./all-stats
 
           echo ::set-env name=RESULTS::"$(cat ./all-stats | sed -z 's/\n/\\n/g')"
