@@ -99,7 +99,7 @@ jobs:
           script: |
             github.issues.createComment({
               issue_number: 1,
-              owner: context.owner,
-              repo: context.repo,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               body: '👋 Thanks for reporting!'
             })
