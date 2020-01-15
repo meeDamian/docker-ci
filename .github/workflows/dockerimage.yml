@@ -87,7 +87,7 @@ jobs:
           echo "|:-------:|----:|--------:|--------:|--------:" >> ./all-stats
 
           for ver in $(ls ./stats/* | awk -F/ '{print $NF}' | cut -d- -f1 | uniq); do
-            line="| ${ver}"
+            line="| **${ver}**"
 
             line="${line} | $(cat ./stats/${ver}-arm | tr -d '\n')"
             line="${line} | $(cat ./stats/${ver}-aarch64 | tr -d '\n')"
