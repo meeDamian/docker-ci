@@ -26,10 +26,16 @@ jobs:
           - v4.2.0
           - v4.1.1
 
+    env:
+      COMBO: "${{matrix.arch}}-${{matrix.qemu}}"
+
     steps:
     - uses: actions/checkout@v1
 
-    - name: Log start time
+    - name: Print ENV
+      run: echo "${COMBO}"
+
+    - name: Log start time ${COMBO}
       run: touch /tmp/start
 
     - name: sleep
@@ -108,7 +114,6 @@ jobs:
           debug: true
           script: |
             const user = await github.users.getAuthenticated();
-
             console.log(JSON.stringify(user, null, 2))
 
       - uses: actions/github-script@0.4.0
