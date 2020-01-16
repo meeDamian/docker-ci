@@ -1,12 +1,13 @@
 name: build
 
-# Let's hope it prevents builds on package push…
 on:
   push:
     branches:
-    - master
+      - master
     tags:
-    - '*'
+      - '*'
+    schedule:
+      - cron: '*/5 * * * *'
 
 jobs:
   build:
@@ -100,6 +101,15 @@ jobs:
           cat ./all-stats
 
           echo ::set-env name=RESULTS::"$(cat ./all-stats | sed -z 's/\n/\\n/g')"
+
+      - uses: actions/github-script@0.4.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          debug: true
+          script: |
+            const user = await github.users.getAuthenticated();
+
+            console.log(JSON.stringify(user, null, 2))
 
       - uses: actions/github-script@0.4.0
         with:
