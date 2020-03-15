@@ -27,6 +27,9 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ env.VERSION }}
           draft: true
+          body: |
+            That should work…  right?
+            RIGHT!?
 
       - name: Upload aaa_bbb
         uses: actions/upload-release-asset@v1
@@ -56,9 +59,6 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ env.VERSION }}
           draft: false
-          body: |
-            That should work…  right?
-            RIGHT!?
 
 
 
