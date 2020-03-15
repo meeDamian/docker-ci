@@ -18,54 +18,12 @@ jobs:
       - name: Create some fake archive
         run: tar -czvf aaa.tgz aaa/
 
-      - name: Create Github Release
-        id: gh_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Complete Github Release
+        uses: meeDamian/github-release@release-v2
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ env.VERSION }}-draft
-          draft: true
-          body: |
-            That should work…  right?
-            RIGHT!?
-
-      - name: Upload aaa_bbb
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.gh_release.outputs.upload_url }}
-          asset_path: ./aaa/bbb
-          asset_name: aaa_bbb.txt
-          asset_content_type: text/plain
-
-      - name: Upload aaa.tgz
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.gh_release.outputs.upload_url }}
-          asset_path: ./aaa.tgz
-          asset_name: aaa.tgz
-          asset_content_type: application/tar+gzip
-
-      - name: Try to edit the release
-        uses: actions/github-script@0.8.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.repos.updateRelease({
-              owner: 'meeDamian',
-              repo: 'docker-ci',
-              release_id: '${{ steps.gh_release.outputs.id }}',
-              name: '${{ env.VERSION }}',
-              draft: false,
-              body: 'That should work…  right?\nRIGHT!?'
-            });
-
-
-
-
-
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.VERSION }}
+          gzip: false
+          files: >
+            aaa_bbb.txt:aaa/bbb
+            aaa.tgz
