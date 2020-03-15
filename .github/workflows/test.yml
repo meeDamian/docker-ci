@@ -33,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.gh_release.outputs.upload_url }}
           asset_path: ./aaa/bbb
           asset_name: aaa_bbb.txt
           asset_content_type: text/plain
@@ -43,7 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.gh_release.outputs.upload_url }}
           asset_path: ./aaa.tgz
           asset_name: aaa.tgz
           asset_content_type: application/tar+gzip
