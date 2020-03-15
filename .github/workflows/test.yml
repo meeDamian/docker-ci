@@ -25,7 +25,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: ${{ env.VERSION }}
+          release_name: ${{ env.VERSION }}-draft
           draft: true
           body: |
             That should work…  right?
@@ -52,13 +52,19 @@ jobs:
           asset_content_type: application/tar+gzip
 
       - name: Try to edit the release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@0.8.0
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ env.VERSION }}
-          draft: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.repos.updateRelease({
+              owner: 'meeDamian',
+              repo: 'docker-ci',
+              release_id: '${{ steps.gh_release.outputs.id }}',
+              name: '${{ env.VERSION }}',
+              draft: false,
+              body: 'That should work…  right?\nRIGHT!?'
+            });
+
 
 
 
