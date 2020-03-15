@@ -1,0 +1,62 @@
+name: build
+
+on:
+  push:
+    tags: [ '*' ]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create some fake archive
+        run: tar -czvf aaa.tgz aaa/
+
+      - name: Create Github Release
+        id: gh_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ env.VERSION }}
+          draft: true
+
+      - name: Upload aaa_bbb
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./aaa/bbb
+          asset_name: aaa_bbb.txt
+          asset_content_type: text/plain
+
+      - name: Upload aaa.tgz
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./aaa.tgz
+          asset_name: aaa.tgz
+          asset_content_type: application/tar+gzip
+
+      - name: Try to edit the release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ env.VERSION }}
+          draft: false
+          body: |
+            That should work…  right?
+            RIGHT!?
+
+
+
+
