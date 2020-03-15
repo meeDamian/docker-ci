@@ -26,7 +26,7 @@ jobs:
           gzip: false
           body: |
             Everything.
-
+            .
             Absolutely everything ${{ env.VERSION }}.
           files: >
             aaa_bbb.txt:aaa/bbb
