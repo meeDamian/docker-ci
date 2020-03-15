@@ -24,6 +24,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.VERSION }}
           gzip: false
+          body: |
+            Everything.
+
+            Absolutely everything ${{ env.VERSION }}.
           files: >
             aaa_bbb.txt:aaa/bbb
             aaa.tgz
