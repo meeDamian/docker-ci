@@ -21,7 +21,8 @@ jobs:
       - name: Create Complete Github Release
         uses: meeDamian/github-release@master
         with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.VERSION }}
           name: ${{ env.VERSION }}
           gzip: false
           body: |
