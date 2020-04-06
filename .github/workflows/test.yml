@@ -19,14 +19,14 @@ jobs:
         run: tar -czvf aaa.tgz aaa/
 
       - name: Create Complete Github Release
-        uses: meeDamian/github-release@release-v2
+        uses: meeDamian/github-release@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+#          token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ env.VERSION }}
           gzip: false
           body: |
             Everything.
-            
+
             Absolutely everything ${{ env.VERSION }}.
           files: >
             aaa_bbb.txt:aaa/bbb
