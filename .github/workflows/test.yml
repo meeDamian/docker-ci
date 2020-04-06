@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VERSION: v9.9.12
+      VERSION: v9.9.13
 
     steps:
       - uses: actions/checkout@v2
@@ -24,11 +24,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.VERSION }}
           name: ${{ env.VERSION }}
-          gzip: false
+#          gzip: false
           body: |
             Everything.
 
             Absolutely everything ${{ env.VERSION }}.
-          files: >
-            aaa_bbb.txt:aaa/bbb
-            aaa.tgz
+#          files: >
+#            aaa_bbb.txt:aaa/bbb
+#            aaa.tgz
