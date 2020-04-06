@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VERSION: v9.9.11
+      VERSION: v9.9.12
 
     steps:
       - uses: actions/checkout@v2
