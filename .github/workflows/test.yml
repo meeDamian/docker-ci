@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VERSION: v9.9.12
+      VERSION: v10.10.10
 
     steps:
       - uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.VERSION }}
-          name: ${{ env.VERSION }}
+          name: Can 'you' even "imagine" "quotes" in name!?
           allow_override: true
           gzip: false
           body: |
