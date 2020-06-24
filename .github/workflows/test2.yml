@@ -10,11 +10,11 @@ jobs:
     name: Short tags
     runs-on: ubuntu-latest
 
+    env:
+      TAG: ${GITHUB_REF#refs/tags/}
+
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set environment
-        run: echo "::set-env name=TAG::${GITHUB_REF#refs/tags/}"
 
       - name: Create, or update the short-name branch
         if: startsWith(env.TAG, 'v0.0') != true
