@@ -16,7 +16,7 @@ jobs:
       - name: Set environment
         run: echo "::set-env name=TAG::${GITHUB_REF#refs/tags/}"
       - name: Create, or update the short-name branch
-        if: ! startsWith(env.TAG, 'v0.0')
+        if: !startsWith(env.TAG, 'v0.0')
         run: |
           SHORT="$(echo "${TAG#v}" | cut -d. -f-2)"
 
