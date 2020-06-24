@@ -28,8 +28,8 @@ jobs:
           gzip: false
           body: |
             Everythinger.
-
-            Absolutely everything ${{ env.VERSION }}.
+            Something that's "very" quoted.
+            Absolutely eve"ryt"hing ${{ env.VERSION }}.
           files: >
             aaa_bbb.txt:aaa/bbb
             aaa.tgz
