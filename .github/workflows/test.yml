@@ -23,13 +23,15 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.VERSION }}
-          name: Can 'you' even "imagine" "quotes" in name!?
+          name: Can 'U' even "imagine" "quotes" in name!?
           allow_override: true
           body: |
             Everythinger.
             Something that's "very" quoted.
             Absolutely eve"ryt"hing ${{ env.VERSION }}.
             https://docs.github.com/en/rest
+
+            \\\\\\\\\\\\\ //////////\/\/\/\/\/\/
           files: >
             aaa_bbb.txt:aaa/bbb
             aaa.tgz
