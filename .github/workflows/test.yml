@@ -22,6 +22,7 @@ jobs:
         uses: meeDamian/github-release@variables
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.VERSION }}
           name: Can 'you' even "imagine" "quotes" in name!?
           allow_override: true
           body: |
