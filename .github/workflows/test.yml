@@ -19,17 +19,16 @@ jobs:
         run: tar -czvf aaa.tgz aaa/
 
       - name: Create Complete Github Release
-        uses: meeDamian/github-release@master
+        uses: meeDamian/github-release@variables
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.VERSION }}
           name: Can 'you' even "imagine" "quotes" in name!?
           allow_override: true
-          gzip: false
           body: |
             Everythinger.
             Something that's "very" quoted.
             Absolutely eve"ryt"hing ${{ env.VERSION }}.
+            https://docs.github.com/en/rest
           files: >
             aaa_bbb.txt:aaa/bbb
             aaa.tgz
